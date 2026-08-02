@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LenisProvider } from "@/components/LenisProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stellar-Aegis Documentation | Soroban Account Abstraction & Policy Engine",
-  description: "Official technical documentation for Stellar-Aegis: Modular Account Abstraction, Passkeys, Ephemeral Sessions, Gas Sponsorship, and Policy Engine for Soroban.",
-  keywords: ["Stellar", "Soroban", "Account Abstraction", "Passkeys", "WebAuthn", "Smart Account", "Policy Engine", "Gas Sponsorship"],
+  title: "MONITOR — Your brand, visible everywhere AI searches",
+  description: "AI Search Visibility & Monitoring Platform. Track, analyze, and optimize your brand presence across ChatGPT, Perplexity, Claude, Gemini, and AI search engines.",
 };
 
 export default function RootLayout({
@@ -28,8 +28,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-cyan-500/20 selection:text-cyan-500">
-        {children}
+      <body className="min-h-full flex flex-col bg-[#000000] text-[#8a8a8a] font-sans selection:bg-[#1f1f1f] selection:text-[#ffffff]">
+        <LenisProvider>
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );

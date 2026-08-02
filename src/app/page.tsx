@@ -1,41 +1,37 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { HomeNavbar } from '@/components/home/HomeNavbar';
-import { Hero } from '@/components/home/Hero';
-import { NativeAlignment } from '@/components/home/NativeAlignment';
-import { Problem } from '@/components/home/Problem';
-import { Solution } from '@/components/home/Solution';
-import { Features } from '@/components/home/Features';
-import { Lifecycle } from '@/components/home/Lifecycle';
-import { ArchitectureSection } from '@/components/home/ArchitectureSection';
-import { DeveloperExperience } from '@/components/home/DeveloperExperience';
-import { RoadmapSection } from '@/components/home/RoadmapSection';
-import { DocsSpotlight } from '@/components/home/DocsSpotlight';
-import { OpenSourceCommunity } from '@/components/home/OpenSourceCommunity';
-import { HomeFooter } from '@/components/home/HomeFooter';
+import { Navbar } from '@/components/monitor/Navbar';
+import { Hero } from '@/components/monitor/Hero';
+import { Stats } from '@/components/monitor/Stats';
+import { BentoFeatures } from '@/components/monitor/BentoFeatures';
+import { EngineBreakdown } from '@/components/monitor/EngineBreakdown';
+import { Integrations } from '@/components/monitor/Integrations';
+import { SocialProof } from '@/components/monitor/SocialProof';
+import { Pricing } from '@/components/monitor/Pricing';
+import { CtaFinal } from '@/components/monitor/CtaFinal';
+import { Footer } from '@/components/monitor/Footer';
 
 export const metadata: Metadata = {
-  title: 'Stellar Aegis — Authorization Control Plane for Stellar Smart Accounts',
+  title: 'MONITOR — Your brand, visible everywhere AI searches',
   description:
-    'Developer-first authorization control plane for Stellar Smart Accounts on Soroban. Managing session lifecycles, policy authoring, emergency revocation, gas sponsorship, and observability.',
+    'AI Search Visibility & Monitoring Platform. Track, analyze, and optimize your brand presence across ChatGPT, Perplexity, Claude, Gemini, and AI search engines in real time.',
 };
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
-      <HomeNavbar />
+    <main
+      className="min-h-screen bg-[#000000] text-[#ffffff] font-sans selection:bg-[#1f1f1f] selection:text-[#ffffff]"
+    >
+      <Navbar />
       <Hero />
-      <NativeAlignment />
-      <Problem />
-      <Solution />
-      <Features />
-      <Lifecycle />
-      <ArchitectureSection />
-      <DeveloperExperience />
-      <RoadmapSection />
-      <DocsSpotlight />
-      <OpenSourceCommunity />
-      <HomeFooter />
+      <Stats />
+      <BentoFeatures />
+      <EngineBreakdown />
+      <Integrations />
+      <SocialProof />
+      <Pricing />
+      <CtaFinal />
+      <Footer />
     </main>
   );
 }

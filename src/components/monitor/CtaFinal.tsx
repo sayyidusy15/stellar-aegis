@@ -3,118 +3,115 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 /* ── Blueprint dot grid overlay ── */
 function BlueprintGrid() {
   return (
     <div
-      className="absolute inset-0 pointer-events-none z-[2]"
+      className="absolute inset-0 pointer-events-none z-[1]"
       style={{
         backgroundImage:
-          'linear-gradient(rgba(138,138,138,0.045) 1px, transparent 1px),' +
-          'linear-gradient(90deg, rgba(138,138,138,0.045) 1px, transparent 1px)',
+          'linear-gradient(rgba(138,138,138,0.05) 1px, transparent 1px),' +
+          'linear-gradient(90deg, rgba(138,138,138,0.05) 1px, transparent 1px)',
         backgroundSize: '60px 60px',
       }}
     />
   );
 }
 
-/* ── Faint concentric circles centered ── */
-function CircularRadar() {
+/* ── Concentric Radar Circles Overlay ── */
+function RadarOverlay() {
   return (
-    <svg
-      aria-hidden="true"
-      className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="50%"
-        cy="50%"
-        r="280"
+    <div className="absolute inset-0 pointer-events-none z-[2] flex items-center justify-center overflow-hidden">
+      <svg
+        className="w-[700px] h-[700px] text-white opacity-20"
+        viewBox="0 0 700 700"
         fill="none"
-        stroke="#8A8A8A"
-        strokeWidth="0.5"
-        strokeOpacity="0.08"
-        strokeDasharray="4 6"
-      />
-      <circle
-        cx="50%"
-        cy="50%"
-        r="380"
-        fill="none"
-        stroke="#8A8A8A"
-        strokeWidth="0.5"
-        strokeOpacity="0.05"
-        strokeDasharray="4 6"
-      />
-    </svg>
+      >
+        <circle cx="350" cy="350" r="180" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" strokeOpacity="0.12" />
+        <circle cx="350" cy="350" r="260" stroke="currentColor" strokeWidth="1" strokeOpacity="0.08" />
+        <circle cx="350" cy="350" r="340" stroke="currentColor" strokeWidth="1" strokeDasharray="8 8" strokeOpacity="0.05" />
+      </svg>
+    </div>
   );
 }
 
 export function CtaFinal() {
   return (
-    <section id="cta" className="bg-[#000000] text-[#ffffff]">
-      {/* 
-        Container limits the background image & mask to stay strictly within 
-        the max-w-7xl vertical rail borders.
-      */}
-      <div className="relative mx-auto max-w-7xl border-l border-r border-[#8A8A8A]/30 overflow-hidden h-[460px] sm:h-[480px] flex items-center justify-center">
-        
-        {/* LAYER 1 — Static Background Mesh Gradient Image */}
-        <div className="absolute inset-0 z-0 select-none pointer-events-none">
-          <Image
-            src="/mesh-gradient/gradient_CTA.png"
-            alt="Mesh Gradient Background"
-            fill
-            sizes="(max-width: 1280px) 100vw, 1280px"
-            className="object-cover object-center"
-            priority
+    <section id="cta" className="bg-[#000000] text-[#ffffff] scroll-mt-20">
+      <div className="relative mx-auto max-w-7xl border-l border-r border-[#8A8A8A]/30 overflow-hidden">
+
+        <div className="relative h-[460px] sm:h-[480px] flex items-center justify-center border-b border-[#8A8A8A]/30 overflow-hidden">
+
+          {/* LAYER 0 — Static Mesh Gradient Image Background */}
+          <div className="absolute inset-0 select-none pointer-events-none z-0">
+            <Image
+              src="/mesh-gradient/gradient_CTA.png"
+              alt="CTA Mesh Background"
+              fill
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              className="object-cover object-center"
+              priority
+            />
+          </div>
+
+          {/* LAYER 1 — Blueprint Grid */}
+          <BlueprintGrid />
+
+          {/* LAYER 2 — Perfect Circular Vignette Mask */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none z-[2]"
+            style={{
+              background:
+                'radial-gradient(circle 450px at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 50%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0) 100%)',
+            }}
           />
-        </div>
 
-        {/* 
-          LAYER 2 — Perfect Circular Vignette Mask.
-          This creates a solid black circle in the absolute center for text readability,
-          and fades out to transparent on the sides to reveal the colorful mesh gradient.
-        */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{
-            background:
-              'radial-gradient(circle 450px at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0) 100%)',
-          }}
-        />
+          {/* LAYER 3 — Concentric Radar Lines */}
+          <RadarOverlay />
 
-        {/* LAYER 3 — Concentric circular radar lines */}
-        <CircularRadar />
+          {/* LAYER 4 — Content Container */}
+          <div className="relative z-10 text-center max-w-2xl px-6 flex flex-col items-center">
 
-        {/* LAYER 4 — Blueprint Grid */}
-        <BlueprintGrid />
-
-        {/* CONTENT */}
-        <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-2xl mx-auto space-y-6">
-
-          {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#ffffff] leading-[1.15] font-sans">
-            Start improving your Smart Account security today
-          </h2>
-
-          {/* Subheading / Description */}
-          <p className="text-[14px] text-[#8a8a8a] max-w-md leading-relaxed font-sans font-medium">
-            Join teams using Aegis to manage granular session policies, hardware passkeys, and on-chain authorization lifecycles.
-          </p>
-
-          {/* 1 Single Button — Rounded Pill */}
-          <div className="pt-2">
-            <motion.button
-              type="button"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-6 py-3 rounded-full bg-[#ffffff] text-[#000000] text-[14px] font-semibold transition-all hover:opacity-95 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            {/* Title — Clean font-mono */}
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-2xl sm:text-4xl md:text-[42px] font-semibold text-[#ffffff] tracking-tight font-mono leading-tight mb-4"
             >
-              Start for free
-            </motion.button>
+              Stop Rebuilding Authorization Infrastructure.
+            </motion.h2>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-sm sm:text-base text-[#8a8a8a] leading-relaxed font-sans font-normal mb-8 max-w-xl"
+            >
+              Deploy production-ready Smart Accounts on Stellar with a standardized operational control plane for session keys, policies, and revocation.
+            </motion.p>
+
+            {/* Single Solid White Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <Link
+                href="/docs/simple-guide"
+                className="px-7 py-3 rounded-full bg-[#ffffff] text-[#000000] text-sm font-mono font-bold transition-all duration-300 hover:bg-[#e0e0e0] hover:scale-[1.02] active:scale-[0.98] shadow-lg inline-block"
+              >
+                Read Developer Guide →
+              </Link>
+            </motion.div>
+
           </div>
 
         </div>

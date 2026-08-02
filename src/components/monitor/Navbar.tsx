@@ -16,10 +16,13 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Features', href: '#features' },
+    { label: 'Problem', href: '#problem' },
+    { label: 'Solution', href: '#solution' },
     { label: 'Capabilities', href: '#capabilities' },
-    { label: 'How it works', href: '#how-it-works' },
-    { label: 'Docs', href: '/docs/simple-guide' },
+    { label: 'Architecture', href: '#architecture' },
+    { label: 'Lifecycle', href: '#how-it-works' },
+    { label: 'DevEx', href: '#devex' },
+    { label: 'Specs', href: '#first-principles' },
   ];
 
   return (
@@ -36,7 +39,7 @@ export function Navbar() {
         {/* Right vertical rail line */}
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-px bg-[#8A8A8A]/30" />
 
-        <div className="flex items-center justify-between px-6 sm:px-8 py-5">
+        <div className="flex items-center justify-between px-6 sm:px-8 py-4">
           {/* Left: Logo */}
           <Link
             href="/"
@@ -54,7 +57,7 @@ export function Navbar() {
 
           {/* Center: Navigation Links (Desktop) */}
           <nav
-            className="hidden md:flex items-center gap-8 font-mono text-[14px]"
+            className="hidden lg:flex items-center gap-6 font-mono text-[13px]"
             aria-label="Main Navigation"
           >
             {navLinks.map((item) => (
@@ -72,7 +75,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/docs/simple-guide"
-              className="hidden sm:inline-flex px-5 py-2 rounded-full bg-[#ffffff] text-[#000000] text-[13px] font-mono font-medium transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+              className="hidden sm:inline-flex px-4 py-2 rounded-full bg-[#ffffff] text-[#000000] text-[12px] font-mono font-bold transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
             >
               Open Docs
             </Link>
@@ -80,7 +83,7 @@ export function Navbar() {
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="md:hidden p-2 rounded-lg text-[#8a8a8a] hover:text-white hover:bg-[#1a1a1a] transition-colors"
+              className="lg:hidden p-2 rounded-lg text-[#8a8a8a] hover:text-white hover:bg-[#1a1a1a] transition-colors"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -90,7 +93,7 @@ export function Navbar() {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#1f1f1f] bg-[#050505] px-6 py-6 space-y-4 font-mono">
+          <div className="lg:hidden border-t border-[#1f1f1f] bg-[#050505] px-6 py-6 space-y-4 font-mono">
             <nav className="flex flex-col space-y-3">
               {navLinks.map((item) => (
                 <a

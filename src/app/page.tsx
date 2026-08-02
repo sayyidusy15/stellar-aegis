@@ -4,22 +4,20 @@ import { GridRails } from '@/components/monitor/GridRails';
 import { Navbar } from '@/components/monitor/Navbar';
 import { Hero } from '@/components/monitor/Hero';
 import { Marquee } from '@/components/monitor/Marquee';
-import { Stats } from '@/components/monitor/Stats';
-import { Statement } from '@/components/monitor/Statement';
+import { ProblemStatement } from '@/components/monitor/ProblemStatement';
+import { SolutionThesis } from '@/components/monitor/SolutionThesis';
 import { Capabilities } from '@/components/monitor/Capabilities';
+import { ArchitectureDiagram } from '@/components/monitor/ArchitectureDiagram';
 import { AuthLifecycle } from '@/components/monitor/AuthLifecycle';
-import { BentoFeatures } from '@/components/monitor/BentoFeatures';
-import { EngineBreakdown } from '@/components/monitor/EngineBreakdown';
-import { Integrations } from '@/components/monitor/Integrations';
-import { SocialProof } from '@/components/monitor/SocialProof';
-import { Pricing } from '@/components/monitor/Pricing';
+import { DevExperience } from '@/components/monitor/DevExperience';
+import { FirstPrinciples } from '@/components/monitor/FirstPrinciples';
 import { CtaFinal } from '@/components/monitor/CtaFinal';
 import { Footer } from '@/components/monitor/Footer';
 
 export const metadata: Metadata = {
   title: 'Stellar Aegis — Authorization Control Plane for Smart Accounts',
   description:
-    'Aegis brings granular session policies, passkey-native authentication, and lifecycle-aware authorization to Stellar Smart Accounts — without replacing your existing setup.',
+    'Aegis is the Authorization Control Plane for Stellar Smart Accounts — providing session lifecycles, human-readable policies, emergency revocation, and observability on Soroban.',
 };
 
 export default function HomePage() {
@@ -27,19 +25,41 @@ export default function HomePage() {
     <main className="min-h-screen bg-[#000000] text-[#ffffff] font-sans selection:bg-[#1f1f1f] selection:text-[#ffffff]">
       {/* Fixed vertical rail lines — continuous from top to bottom */}
       <GridRails />
+
+      {/* Sticky Header Navbar */}
       <Navbar />
+
+      {/* 01. HERO — Direct Positioning */}
       <Hero />
+
+      {/* 02. MARQUEE — Ecosystem Primitives */}
       <Marquee />
-      <Statement />
-      <Stats />
+
+      {/* 03. PROBLEM — Every Team Rebuilds The Same Infrastructure */}
+      <ProblemStatement />
+
+      {/* 04. SOLUTION — Separation of Enforcement & Lifecycle */}
+      <SolutionThesis />
+
+      {/* 05. CAPABILITIES — Categorized Protocol Subsystems */}
       <Capabilities />
+
+      {/* 06. ARCHITECTURE — Ecosystem Stack Position */}
+      <ArchitectureDiagram />
+
+      {/* 07. LIFECYCLE — Operational Workflow */}
       <AuthLifecycle />
-      {/* <BentoFeatures /> */}
-      {/* <EngineBreakdown /> */}
-      {/* <Integrations /> */}
-      {/* <SocialProof /> */}
-      {/* <Pricing /> */}
+
+      {/* 08. DEV EXPERIENCE — SDK vs Control Console */}
+      <DevExperience />
+
+      {/* 09. FIRST PRINCIPLES — Technical Specifications & ADRs */}
+      <FirstPrinciples />
+
+      {/* 10. FINAL CTA — Stop Rebuilding Infrastructure */}
       <CtaFinal />
+
+      {/* FOOTER */}
       <Footer />
     </main>
   );

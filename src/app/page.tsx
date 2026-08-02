@@ -5,6 +5,7 @@ import { Navbar } from '@/components/monitor/Navbar';
 import { Hero } from '@/components/monitor/Hero';
 import { Marquee } from '@/components/monitor/Marquee';
 import { Stats } from '@/components/monitor/Stats';
+import { Statement } from '@/components/monitor/Statement';
 import { BentoFeatures } from '@/components/monitor/BentoFeatures';
 import { EngineBreakdown } from '@/components/monitor/EngineBreakdown';
 import { Integrations } from '@/components/monitor/Integrations';
@@ -24,11 +25,11 @@ export default function HomePage() {
     <main className="min-h-screen bg-[#000000] text-[#ffffff] font-sans selection:bg-[#1f1f1f] selection:text-[#ffffff]">
       {/* Fixed vertical rail lines — continuous from top to bottom */}
       <GridRails />
-
       <Navbar />
       <Hero />
       <Marquee />
-      <Stats />
+      <Statement />
+      {/* <Stats /> */}
       <BentoFeatures />
       <EngineBreakdown />
       <Integrations />

@@ -6,6 +6,8 @@ import { Hero } from '@/components/monitor/Hero';
 import { Marquee } from '@/components/monitor/Marquee';
 import { Stats } from '@/components/monitor/Stats';
 import { Statement } from '@/components/monitor/Statement';
+import { Capabilities } from '@/components/monitor/Capabilities';
+import { AuthLifecycle } from '@/components/monitor/AuthLifecycle';
 import { BentoFeatures } from '@/components/monitor/BentoFeatures';
 import { EngineBreakdown } from '@/components/monitor/EngineBreakdown';
 import { Integrations } from '@/components/monitor/Integrations';
@@ -30,11 +32,13 @@ export default function HomePage() {
       <Marquee />
       <Statement />
       <Stats />
-      <BentoFeatures />
-      <EngineBreakdown />
-      <Integrations />
-      <SocialProof />
-      <Pricing />
+      <Capabilities />
+      <AuthLifecycle />
+      {/* <BentoFeatures /> */}
+      {/* <EngineBreakdown /> */}
+      {/* <Integrations /> */}
+      {/* <SocialProof /> */}
+      {/* <Pricing /> */}
       <CtaFinal />
       <Footer />
     </main>

@@ -3,6 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import { SpotlightGlow } from './SpotlightGlow';
+
 export function SocialProof() {
   const testimonials = [
     {
@@ -29,7 +31,8 @@ export function SocialProof() {
     <section className="py-24 bg-[#000000] border-t border-[#1f1f1f] text-[#ffffff]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <div className="relative text-center max-w-2xl mx-auto mb-16 space-y-3 overflow-visible z-10">
+          <SpotlightGlow />
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-[661px] bg-[#1f1f1f] border border-[#0d0d0d] text-xs font-mono text-[#8a8a8a]">
             <span>TESTIMONIALS</span>
           </div>

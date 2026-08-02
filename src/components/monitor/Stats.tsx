@@ -23,6 +23,8 @@ function CornerSq({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
   return <span aria-hidden="true" style={style} />;
 }
 
+import { SpotlightGlow } from './SpotlightGlow';
+
 export function Stats() {
   const flowSteps = [
     {
@@ -61,7 +63,8 @@ export function Stats() {
       <div className="relative mx-auto max-w-7xl border-b border-[#8A8A8A]/30">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto pt-24 pb-16 px-6 sm:px-8 space-y-5">
+        <div className="relative text-center max-w-3xl mx-auto pt-24 pb-16 px-6 sm:px-8 space-y-5 overflow-visible z-10">
+          <SpotlightGlow />
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-[661px] bg-[#0d0d0d] border border-[#8A8A8A]/25 text-xs font-mono text-[#8a8a8a] tracking-wider uppercase">
             STELLAR-NATIVE ENGINEERING
           </div>

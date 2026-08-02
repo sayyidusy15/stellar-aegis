@@ -5,12 +5,15 @@ import { motion } from 'framer-motion';
 import { DitheredCanvas } from '@/components/DitheredCanvas';
 import { Eye, ShieldCheck, Zap, BarChart3, Search, RefreshCw, Cpu, Layers } from 'lucide-react';
 
+import { SpotlightGlow } from './SpotlightGlow';
+
 export function BentoFeatures() {
   return (
     <section id="bento" className="py-24 bg-[#000000] text-[#ffffff] relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="relative text-center max-w-3xl mx-auto mb-16 space-y-4 overflow-visible z-10">
+          <SpotlightGlow />
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-[661px] bg-[#1f1f1f] border border-[#0d0d0d] text-xs font-mono text-[#8a8a8a]">
             <span>BENTO ARCHITECTURE</span>
           </div>

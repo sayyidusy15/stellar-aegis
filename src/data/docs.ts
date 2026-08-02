@@ -828,3 +828,25 @@ impl CustomAccount for AegisSmartAccount {
     }
   }
 };
+
+import { DOCS_DATA_EN, SIDEBAR_NAVIGATION_EN } from './docsEn';
+import { Language } from './i18n';
+
+export function getSidebarNavigation(lang: Language = 'en'): SidebarGroup[] {
+  return lang === 'id' ? SIDEBAR_NAVIGATION : SIDEBAR_NAVIGATION_EN;
+}
+
+export function getDocData(slug: string, lang: Language = 'en'): DocItem | undefined {
+  if (lang === 'id') {
+    return DOCS_DATA[slug];
+  }
+  return DOCS_DATA_EN[slug] || DOCS_DATA[slug];
+}
+
+export function getAllDocsData(lang: Language = 'en'): Record<string, DocItem> {
+  if (lang === 'id') {
+    return DOCS_DATA;
+  }
+  return DOCS_DATA_EN;
+}
+

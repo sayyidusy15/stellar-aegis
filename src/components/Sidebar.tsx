@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { SIDEBAR_NAVIGATION, SidebarGroup } from '@/data/docs';
-import { ChevronDown, ChevronRight, Folder, FolderOpen, FileText, Shield } from 'lucide-react';
+import { SidebarGroup, getSidebarNavigation } from '@/data/docs';
+import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/data/i18n';
 
 interface SidebarProps {
   mobileOpen: boolean;
@@ -13,8 +16,9 @@ interface SidebarProps {
 
 export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
   const pathname = usePathname();
-  
-  // Track open folders (default components and features open)
+  const { lang } = useLanguage();
+  const navItems = getSidebarNavigation(lang);
+
   const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({
     '06': true,
     '07': true,
@@ -37,21 +41,26 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
   };
 
   const content = (
-    <div className="flex flex-col h-full py-4 overflow-y-auto font-sans">
-      {/* Root Header */}
-      <div className="px-4 mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-cyan-600 dark:text-cyan-400">
-          <Folder className="w-4 h-4 text-cyan-500" />
-          <span>Stellar-Aegis</span>
-        </div>
-        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-          v1.0.0
+    <div className="flex flex-col h-full py-5 overflow-y-auto">
+      {/* Logo / Root Header */}
+      <div className="px-5 mb-6 flex items-center justify-between border-b border-[#1a1a1a] pb-4">
+        <Link href="/" className="flex items-center group">
+          <Image
+            src="/logo-aegis-2.png"
+            alt="Stellar Aegis"
+            width={90}
+            height={28}
+            className="object-contain brightness-0 invert opacity-75 group-hover:opacity-100 transition-opacity"
+          />
+        </Link>
+        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#2a2a2a] text-[#555] bg-[#0d0d0d]">
+          {t(lang, 'sidebar.version')}
         </span>
       </div>
 
-      {/* Sidebar Tree Navigation */}
-      <nav className="space-y-0.5 px-2">
-        {SIDEBAR_NAVIGATION.map((group) => {
+      {/* Sidebar Nav Tree */}
+      <nav className="space-y-0.5 px-3 flex-1">
+        {navItems.map((group) => {
           if (group.isFolder && group.children) {
             const isOpen = !!openFolders[group.id];
             const folderActive = isFolderActive(group);
@@ -61,30 +70,23 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
                 {/* Folder Header */}
                 <button
                   onClick={() => toggleFolder(group.id)}
-                  className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                  className={`w-full flex items-center justify-between px-3 py-2 text-xs font-mono font-semibold uppercase tracking-widest transition-colors ${
                     folderActive
-                      ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-500/10 font-semibold'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
+                      ? 'text-[#FF4747]'
+                      : 'text-[#555] hover:text-[#8a8a8a]'
                   }`}
                 >
-                  <div className="flex items-center gap-2 truncate">
-                    {isOpen ? (
-                      <FolderOpen className="w-4 h-4 text-cyan-500 shrink-0" />
-                    ) : (
-                      <Folder className="w-4 h-4 text-slate-400 shrink-0" />
-                    )}
-                    <span className="truncate">{group.title}</span>
-                  </div>
+                  <span className="truncate">{group.title}</span>
                   {isOpen ? (
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <ChevronDown className="w-3 h-3 shrink-0" />
                   ) : (
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <ChevronRight className="w-3 h-3 shrink-0" />
                   )}
                 </button>
 
-                {/* Folder Children Tree */}
+                {/* Children */}
                 {isOpen && (
-                  <div className="mt-1 ml-4 pl-2 border-l border-slate-200 dark:border-slate-800 space-y-0.5">
+                  <div className="mt-1 ml-3 pl-3 border-l border-[#1f1f1f] space-y-0.5">
                     {group.children.map((child) => {
                       const active = isActive(child.slug);
                       return (
@@ -92,13 +94,17 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
                           key={child.slug}
                           href={`/docs/${child.slug}`}
                           onClick={onCloseMobile}
-                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+                          className={`flex items-center gap-2 px-3 py-2 text-xs font-sans font-medium transition-all ${
                             active
-                              ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/15 dark:bg-cyan-400/10 font-semibold border-l-2 border-cyan-500'
-                              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
+                              ? 'text-white border-l-2 border-[#FF4747] -ml-[1px] bg-[#FF4747]/5'
+                              : 'text-[#666] hover:text-[#ccc] hover:bg-white/[0.02]'
                           }`}
                         >
-                          <FileText className={`w-3.5 h-3.5 shrink-0 ${active ? 'text-cyan-500' : 'text-slate-400'}`} />
+                          <span
+                            className={`w-1 h-1 rounded-full shrink-0 ${
+                              active ? 'bg-[#FF4747]' : 'bg-[#333]'
+                            }`}
+                          />
                           <span className="truncate">{child.title}</span>
                         </Link>
                       );
@@ -116,31 +122,35 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
               key={group.id}
               href={`/docs/${group.slug}`}
               onClick={onCloseMobile}
-              className={`flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium transition-all ${
                 active
-                  ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/15 dark:bg-cyan-400/10 font-semibold border-l-2 border-cyan-500 shadow-2xs'
-                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+                  ? 'text-white border-l-2 border-[#FF4747] bg-[#FF4747]/5'
+                  : 'text-[#666] hover:text-[#ccc] hover:bg-white/[0.02]'
               }`}
             >
-              <FileText className={`w-4 h-4 shrink-0 ${active ? 'text-cyan-500' : 'text-slate-400'}`} />
+              <span
+                className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                  active ? 'bg-[#FF4747]' : 'bg-[#2a2a2a]'
+                }`}
+              />
               <span className="truncate">{group.title}</span>
             </Link>
           );
         })}
       </nav>
 
-      {/* Footer Info inside Sidebar */}
-      <div className="mt-auto px-4 pt-6 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 space-y-1">
-        <p className="font-semibold text-slate-700 dark:text-slate-300">Soroban Smart Contracts</p>
-        <p>Built for Protocol 15 & Soroban Check Auth Host Vector</p>
+      {/* Sidebar Footer */}
+      <div className="mt-auto px-5 pt-5 border-t border-[#1a1a1a] text-[11px] text-[#444] font-mono space-y-1">
+        <p className="text-[#666] font-semibold">{t(lang, 'sidebar.footer_title')}</p>
+        <p>{t(lang, 'sidebar.footer_subtitle')}</p>
       </div>
     </div>
   );
 
   return (
     <>
-      {/* Desktop Sidebar (Fixed Left) */}
-      <aside className="hidden md:block w-64 lg:w-72 shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 h-[calc(100vh-4rem)] sticky top-16 transition-colors">
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:block w-60 lg:w-64 shrink-0 border-r border-[#1a1a1a] bg-[#000000] h-[calc(100vh-4rem)] sticky top-16">
         {content}
       </aside>
 
@@ -148,10 +158,10 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden flex">
           <div
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-black/70 backdrop-blur-xs"
             onClick={onCloseMobile}
           />
-          <div className="relative w-72 max-w-full bg-white dark:bg-slate-950 h-full shadow-2xl z-10">
+          <div className="relative w-64 max-w-full bg-[#000000] border-r border-[#1a1a1a] h-full shadow-2xl z-10">
             {content}
           </div>
         </div>

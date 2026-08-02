@@ -133,7 +133,7 @@ export function AuthLifecycle() {
   const active = stages[activeIdx];
 
   return (
-    <section id="lifecycle" className="bg-[#000000] text-[#ffffff]">
+    <section id="how-it-works" className="bg-[#000000] text-[#ffffff] scroll-mt-20">
       <div className="relative mx-auto max-w-7xl border-b border-[#8A8A8A]/30">
 
         {/* Header */}

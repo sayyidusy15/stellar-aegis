@@ -1,112 +1,90 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { Search, Sun, Moon, Shield, Menu, X, Terminal, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import { Search, Menu, X } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/data/i18n';
 
-interface NavbarProps {
+interface DocsNavbarProps {
   onOpenSearch: () => void;
   onToggleMobileSidebar: () => void;
 }
 
-export function Navbar({ onOpenSearch, onToggleMobileSidebar }: NavbarProps) {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark') || 
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      setTheme('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      setTheme('light');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (theme === 'dark') {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setTheme('light');
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setTheme('dark');
-    }
-  };
+export function DocsNavbar({ onOpenSearch, onToggleMobileSidebar }: DocsNavbarProps) {
+  const { lang, toggle } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors">
-      <div className="flex h-16 items-center justify-between px-4 md:px-6">
-        {/* Left: Mobile Menu Toggle & Brand */}
+    <header className="sticky top-0 z-40 w-full border-b border-[#1f1f1f] bg-[#000000]/90 backdrop-blur-md">
+      {/* Inner container aligned with rail lines */}
+      <div className="flex h-16 items-center justify-between px-6 lg:px-10">
+        
+        {/* Left: Mobile toggle + Logo */}
         <div className="flex items-center gap-3">
           <button
             onClick={onToggleMobileSidebar}
-            className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="md:hidden p-2 rounded-lg text-[#8a8a8a] hover:text-white hover:bg-white/5 transition-colors"
             aria-label="Toggle Navigation"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          <Link href="/docs/overview" className="flex items-center gap-2.5 group">
-            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              <Shield className="w-5 h-5 fill-white/20" />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-lg tracking-tight text-slate-900 dark:text-white font-mono">
-                  Stellar<span className="text-cyan-500 dark:text-cyan-400">-Aegis</span>
-                </span>
-                <span className="px-1.5 py-0.5 text-[10px] font-semibold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 rounded">
-                  v1.0
-                </span>
-              </div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans tracking-wide">
-                Account Abstraction & Policy Engine
-              </span>
-            </div>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/logo-aegis-2.png"
+              alt="Stellar Aegis"
+              width={110}
+              height={32}
+              className="object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
+            />
           </Link>
 
-          {/* Top Header Links */}
-          <nav className="hidden lg:flex items-center gap-6 ml-8 text-sm font-medium text-slate-600 dark:text-slate-400">
-            <Link href="/docs/overview" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              Docs
+          {/* Divider */}
+          <span className="hidden md:block text-[#2a2a2a] text-lg font-light ml-1 mr-1 select-none">
+            /
+          </span>
+
+          {/* Top Nav Links */}
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-mono font-medium text-[#8a8a8a]">
+            <Link href="/docs/overview" className="hover:text-white transition-colors">
+              {t(lang, 'nav.docs')}
             </Link>
-            <Link href="/docs/architecture" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              Architecture
+            <Link href="/docs/architecture" className="hover:text-white transition-colors">
+              {t(lang, 'nav.architecture')}
             </Link>
-            <Link href="/docs/developer-guide" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              Developer Guide
+            <Link href="/docs/developer-guide" className="hover:text-white transition-colors">
+              {t(lang, 'nav.developer_guide')}
             </Link>
-            <Link href="/docs/security-model" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              Security
+            <Link href="/docs/security-model" className="hover:text-white transition-colors">
+              {t(lang, 'nav.security')}
             </Link>
           </nav>
         </div>
 
-        {/* Right: Search & External Utilities */}
+        {/* Right: Search + GitHub + Language toggle */}
         <div className="flex items-center gap-3">
-          {/* Quick Search Button */}
+
+          {/* Search */}
           <button
             onClick={onOpenSearch}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg transition-all w-36 sm:w-56 justify-between shadow-xs"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs text-[#8a8a8a] bg-[#0d0d0d] hover:bg-[#141414] border border-[#2a2a2a] hover:border-[#3a3a3a] rounded-lg transition-all w-36 sm:w-52 justify-between font-mono"
           >
             <span className="flex items-center gap-2 truncate">
-              <Search className="w-3.5 h-3.5 text-slate-400" />
-              <span>Search docs...</span>
+              <Search className="w-3.5 h-3.5 text-[#555]" />
+              <span>{t(lang, 'nav.search_placeholder')}</span>
             </span>
-            <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded shadow-2xs">
+            <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-[#555] bg-[#1a1a1a] border border-[#2a2a2a] rounded">
               <span className="text-[9px]">⌘</span>K
             </kbd>
           </button>
 
-          {/* GitHub SVG Link */}
+          {/* GitHub */}
           <a
             href="https://github.com/stellar/stellar-aegis"
             target="_blank"
             rel="noreferrer"
-            className="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="p-2 text-[#8a8a8a] hover:text-white rounded-lg hover:bg-white/5 transition-colors"
             title="GitHub Repository"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -114,13 +92,31 @@ export function Navbar({ onOpenSearch, onToggleMobileSidebar }: NavbarProps) {
             </svg>
           </a>
 
-          {/* Theme Toggle */}
+          {/* Language Toggle — EN | ID pill */}
           <button
-            onClick={toggleTheme}
-            className="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            title="Toggle Light/Dark Theme"
+            onClick={toggle}
+            aria-label="Toggle language"
+            className="flex items-center gap-0 rounded-full border border-[#2a2a2a] overflow-hidden font-mono text-[11px] font-bold tracking-widest"
           >
-            {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-slate-600" />}
+            <span
+              className={`px-3 py-1.5 transition-colors ${
+                lang === 'en'
+                  ? 'bg-[#FF4747] text-white'
+                  : 'bg-transparent text-[#555] hover:text-[#8a8a8a]'
+              }`}
+            >
+              EN
+            </span>
+            <span className="text-[#2a2a2a] text-xs select-none">|</span>
+            <span
+              className={`px-3 py-1.5 transition-colors ${
+                lang === 'id'
+                  ? 'bg-[#FF4747] text-white'
+                  : 'bg-transparent text-[#555] hover:text-[#8a8a8a]'
+              }`}
+            >
+              ID
+            </span>
           </button>
         </div>
       </div>

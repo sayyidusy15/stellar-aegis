@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { SubHeading } from '@/data/docs';
-import { AlignLeft, Hash } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/data/i18n';
 
 interface TableOfContentsProps {
   subheadings: SubHeading[];
@@ -10,6 +11,7 @@ interface TableOfContentsProps {
 
 export function TableOfContents({ subheadings }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('');
+  const { lang } = useLanguage();
 
   useEffect(() => {
     if (!subheadings || subheadings.length === 0) return;
@@ -36,26 +38,26 @@ export function TableOfContents({ subheadings }: TableOfContentsProps) {
   if (!subheadings || subheadings.length === 0) return null;
 
   return (
-    <aside className="hidden xl:block w-64 shrink-0 py-6 px-4 border-l border-slate-200 dark:border-slate-800 h-[calc(100vh-4rem)] sticky top-16 overflow-y-auto text-xs">
-      <div className="flex items-center gap-2 font-mono font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider mb-4">
-        <AlignLeft className="w-3.5 h-3.5 text-cyan-500" />
-        <span>On This Page</span>
+    <aside className="hidden xl:block w-56 shrink-0 py-6 px-4 border-l border-[#1a1a1a] h-[calc(100vh-4rem)] sticky top-16 overflow-y-auto text-xs">
+      {/* Header */}
+      <div className="font-mono font-bold text-[#555] uppercase tracking-widest text-[10px] mb-4">
+        {t(lang, 'toc.on_this_page')}
       </div>
 
-      <nav className="space-y-2 font-medium">
+      <nav className="space-y-1">
         {subheadings.map((heading) => {
           const isActive = activeId === heading.id;
           return (
             <a
               key={heading.id}
               href={`#${heading.id}`}
-              className={`flex items-center gap-1.5 py-1 px-2 rounded transition-colors ${
+              className={`flex items-center gap-2 py-1.5 px-2 text-xs font-sans transition-all ${
                 isActive
-                  ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-500/10 font-semibold border-l-2 border-cyan-500'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                  ? 'text-white border-l-2 border-[#FF4747] -ml-[1px] bg-[#FF4747]/5 font-medium'
+                  : 'text-[#555] hover:text-[#ccc] border-l-2 border-transparent -ml-[1px]'
               }`}
             >
-              <Hash className={`w-3 h-3 shrink-0 ${isActive ? 'text-cyan-500' : 'text-slate-400'}`} />
+              <span className={`w-1 h-1 rounded-full shrink-0 ${isActive ? 'bg-[#FF4747]' : 'bg-[#333]'}`} />
               <span className="truncate">{heading.title}</span>
             </a>
           );

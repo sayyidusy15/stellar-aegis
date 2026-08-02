@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Key, FileText, Zap, Shield, Activity, Terminal, Code, Cpu } from 'lucide-react';
+import { SpotlightGlow } from './SpotlightGlow';
 
 // Corner square mark (matching the reference image style)
 function CornerSq({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
@@ -22,8 +23,6 @@ function CornerSq({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
   };
   return <span aria-hidden="true" style={style} />;
 }
-
-import { SpotlightGlow } from './SpotlightGlow';
 
 export function Capabilities() {
   const items = [
@@ -78,7 +77,7 @@ export function Capabilities() {
   ];
 
   return (
-    <section id="capabilities" className="bg-[#000000] text-[#ffffff]">
+    <section id="capabilities" className="bg-[#000000] text-[#ffffff] scroll-mt-20">
       {/*
         Outer wrapper: max-w-7xl, gap-0, shared borders.
         Aligns perfectly with the vertical rail lines.

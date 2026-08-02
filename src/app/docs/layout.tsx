@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Navbar } from '@/components/Navbar';
+import { LanguageProvider } from '@/context/LanguageContext';
+import { DocsNavbar } from '@/components/Navbar';
 import { Sidebar } from '@/components/Sidebar';
 import { SearchModal } from '@/components/SearchModal';
 
@@ -14,27 +15,29 @@ export default function DocsLayout({
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors">
-      <Navbar
-        onOpenSearch={() => setSearchOpen(true)}
-        onToggleMobileSidebar={() => setMobileSidebarOpen((prev) => !prev)}
-      />
-
-      <div className="flex-1 flex max-w-8xl w-full mx-auto">
-        <Sidebar
-          mobileOpen={mobileSidebarOpen}
-          onCloseMobile={() => setMobileSidebarOpen(false)}
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-[#000000]">
+        <DocsNavbar
+          onOpenSearch={() => setSearchOpen(true)}
+          onToggleMobileSidebar={() => setMobileSidebarOpen((prev) => !prev)}
         />
 
-        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-8">
-          {children}
-        </main>
-      </div>
+        <div className="flex-1 flex w-full">
+          <Sidebar
+            mobileOpen={mobileSidebarOpen}
+            onCloseMobile={() => setMobileSidebarOpen(false)}
+          />
 
-      <SearchModal
-        isOpen={searchOpen}
-        onClose={() => setSearchOpen(false)}
-      />
-    </div>
+          <main className="flex-1 min-w-0 px-6 lg:px-10 py-10">
+            {children}
+          </main>
+        </div>
+
+        <SearchModal
+          isOpen={searchOpen}
+          onClose={() => setSearchOpen(false)}
+        />
+      </div>
+    </LanguageProvider>
   );
 }

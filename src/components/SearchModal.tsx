@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { DOCS_DATA, DocItem } from '@/data/docs';
+import { DocItem, getAllDocsData } from '@/data/docs';
 import { Search, X, FileText, ChevronRight, Hash } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { t } from '@/data/i18n';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -22,6 +24,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     if (isOpen) {
@@ -37,9 +40,6 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         if (isOpen) onClose();
-        else {
-          // Open search modal
-        }
       }
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -58,8 +58,9 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     const q = query.toLowerCase();
     const matches: SearchResult[] = [];
+    const docs = getAllDocsData(lang);
 
-    Object.values(DOCS_DATA).forEach((doc) => {
+    Object.values(docs).forEach((doc) => {
       // Check title or description
       if (doc.title.toLowerCase().includes(q) || doc.description.toLowerCase().includes(q)) {
         matches.push({ doc });
@@ -109,26 +110,26 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/60 backdrop-blur-xs transition-opacity">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-xs transition-opacity">
       <div
         className="fixed inset-0"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden z-10 font-sans">
+      <div className="relative w-full max-w-2xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-2xl overflow-hidden z-10 font-sans">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 border-b border-slate-200 dark:border-slate-800">
-          <Search className="w-5 h-5 text-slate-400 shrink-0 mr-3" />
+        <div className="flex items-center px-4 border-b border-[#1f1f1f]">
+          <Search className="w-5 h-5 text-[#555] shrink-0 mr-3" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search Stellar-Aegis documentation..."
-            className="w-full py-4 text-sm text-slate-900 dark:text-white bg-transparent border-none outline-none placeholder:text-slate-400"
+            placeholder={t(lang, 'search.placeholder')}
+            className="w-full py-4 text-sm text-white bg-transparent border-none outline-none placeholder:text-[#555] font-mono"
           />
           {query && (
-            <button onClick={() => setQuery('')} className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+            <button onClick={() => setQuery('')} className="p-1 text-[#555] hover:text-[#8a8a8a]">
               <X className="w-4 h-4" />
             </button>
           )}
@@ -137,12 +138,12 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         {/* Results List */}
         <div className="max-h-96 overflow-y-auto p-2">
           {query.trim() === '' ? (
-            <div className="py-8 text-center text-xs text-slate-400">
-              Type to search components, features, SDK methods, and security specs...
+            <div className="py-8 text-center text-xs text-[#555] font-mono">
+              {t(lang, 'search.empty_hint')}
             </div>
           ) : results.length === 0 ? (
-            <div className="py-8 text-center text-xs text-slate-400">
-              No documentation matches found for &quot;<span className="text-slate-600 dark:text-slate-200">{query}</span>&quot;
+            <div className="py-8 text-center text-xs text-[#555] font-mono">
+              {t(lang, 'search.no_results')} &quot;<span className="text-[#8a8a8a]">{query}</span>&quot;
             </div>
           ) : (
             <div className="space-y-1">
@@ -153,33 +154,33 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     key={`${item.doc.slug}-${index}`}
                     onClick={() => handleSelect(item)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`w-full text-left flex items-start gap-3 p-3 rounded-lg text-xs transition-colors ${
+                    className={`w-full text-left flex items-start gap-3 p-3 text-xs transition-colors ${
                       isSelected
-                        ? 'bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/30 text-slate-900 dark:text-white'
-                        : 'hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300'
+                        ? 'bg-[#FF4747]/10 border-l-2 border-[#FF4747] text-white'
+                        : 'hover:bg-[#141414] text-[#8a8a8a]'
                     }`}
                   >
-                    <FileText className={`w-4 h-4 shrink-0 mt-0.5 ${isSelected ? 'text-cyan-500' : 'text-slate-400'}`} />
+                    <FileText className={`w-4 h-4 shrink-0 mt-0.5 ${isSelected ? 'text-[#FF4747]' : 'text-[#555]'}`} />
                     <div className="flex-1 truncate">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-slate-900 dark:text-white">{item.doc.title}</span>
+                        <span className="font-semibold text-white">{item.doc.title}</span>
                         {item.doc.category && (
-                          <span className="px-1.5 py-0.5 text-[10px] rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
+                          <span className="px-1.5 py-0.5 text-[10px] font-mono bg-[#1a1a1a] text-[#666] border border-[#2a2a2a]">
                             {item.doc.category}
                           </span>
                         )}
                       </div>
                       {item.headingMatch && (
-                        <div className="flex items-center gap-1 mt-1 text-[11px] text-cyan-600 dark:text-cyan-400 font-medium">
+                        <div className="flex items-center gap-1 mt-1 text-[11px] text-[#FF4747] font-mono">
                           <Hash className="w-3 h-3" />
                           <span>{item.headingMatch}</span>
                         </div>
                       )}
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                      <p className="text-[11px] text-[#666] truncate mt-0.5">
                         {item.snippet || item.doc.description}
                       </p>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 self-center" />
+                    <ChevronRight className="w-4 h-4 text-[#444] shrink-0 self-center" />
                   </button>
                 );
               })}
@@ -188,12 +189,12 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         </div>
 
         {/* Footer shortcuts */}
-        <div className="px-4 py-2 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+        <div className="px-4 py-2 bg-[#050505] border-t border-[#1f1f1f] flex items-center justify-between text-[10px] text-[#555] font-mono">
           <div className="flex items-center gap-3">
-            <span><kbd className="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">↑↓</kbd> Navigate</span>
-            <span><kbd className="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">↵</kbd> Select</span>
+            <span><kbd className="px-1 py-0.5 bg-[#1a1a1a] border border-[#2a2a2a] text-[#8a8a8a]">↑↓</kbd> {t(lang, 'search.navigate')}</span>
+            <span><kbd className="px-1 py-0.5 bg-[#1a1a1a] border border-[#2a2a2a] text-[#8a8a8a]">↵</kbd> {t(lang, 'search.select')}</span>
           </div>
-          <span><kbd className="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">ESC</kbd> Close</span>
+          <span><kbd className="px-1 py-0.5 bg-[#1a1a1a] border border-[#2a2a2a] text-[#8a8a8a]">ESC</kbd> {t(lang, 'search.close')}</span>
         </div>
       </div>
     </div>

@@ -212,6 +212,22 @@ stellar-journey/
 
 ---
 
+## MVP & Architectural Boundaries
+
+To ensure complete transparency regarding what Stellar Aegis handles and where its trust boundaries lie:
+
+- **Soroban Protocol 15+ Compatible**: Designed specifically for Stellar Smart Accounts implementing Soroban's `CustomAccount` trait and `check_auth` host vector.
+- **Passkey & Session Key Auth**: Supports WebAuthn (FIDO2) for master owner keys and Ed25519 for temporary delegated session keys.
+- **On-Chain Enforcement Dominance**: Absolute security enforcement occurs 100% on-chain inside `check_auth`. Aegis off-chain services cannot bypass, override, or fake an on-chain authorization rejection.
+- **Off-Path Middleware Placement**: Aegis Control Plane operates outside the direct transaction execution path, eliminating middleware single points of failure or network latency overhead.
+- **Soroban Temporary Storage**: Active session keys use Soroban `TemporaryStorage` with automatic ledger TTL decay to minimize on-chain state footprint.
+- **Deterministic Policy Compiler**: Human-readable YAML policies are compiled into compact WASM binary digests; non-deterministic attributes (e.g., client IP addresses, off-chain risk scores) are excluded from on-chain verification.
+- **Emergency Circuit Breakers**: Instant revocation writes a single-bit revocation flag to Smart Account storage, immediately halting compromised sessions.
+- **Non-Custodial Guarantee**: Aegis never holds master private keys, user funds, or transaction signing authority. Assets remain 100% under on-chain Smart Account control.
+
+---
+
 ## License
 
 Built for the Stellar & Soroban Ecosystem. Released under the [MIT License](LICENSE).
+

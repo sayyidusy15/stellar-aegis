@@ -19,7 +19,7 @@ Aegis brings granular session policies, passkey-native authentication, and lifec
 > [!IMPORTANT]
 > **Architectural Boundary**: Stellar Aegis is **not a wallet**, **not a new Smart Account contract**, and **not a Passkey SDK**. Aegis operates strictly outside the direct execution path as an operational control plane. Absolute security enforcement remains 100% on-chain inside the Smart Account's native Soroban `check_auth` host vector.
 
-[Live Demo](http://localhost:3000) · [Developer Documentation](http://localhost:3000/docs/simple-guide) · [Architectural Decision Records (ADRs)](http://localhost:3000/docs/adr) · [Threat Model Spec](http://localhost:3000/docs/threat-model)
+[Live Demo](https://stellar-aegis.vercel.app) · [Developer Documentation](https://stellar-aegis.vercel.app/docs/simple-guide) · [Architectural Decision Records (ADRs)](https://stellar-aegis.vercel.app/docs/adr) · [Threat Model Spec](https://stellar-aegis.vercel.app/docs/threat-model)
 
 ---
 
@@ -140,15 +140,15 @@ The project includes deep-dive architectural specifications built from first pri
 
 | Specification               | Document                                   | Description                                        |
 | --------------------------- | ------------------------------------------ | -------------------------------------------------- |
-| **Simple Overview**   | [DOC-00](src/app/docs/[[...slug]]/page.tsx) | Plain-language introduction and corporate analogy  |
-| **Project Context**   | [DOC-01](src/app/docs/[[...slug]]/page.tsx) | High-level control plane thesis and positioning    |
-| **Problem Statement** | [DOC-02](src/app/docs/[[...slug]]/page.tsx) | Operational friction analysis in Soroban dApps     |
-| **Policy Model**      | [DOC-07](src/app/docs/[[...slug]]/page.tsx) | YAML policy format & deterministic compiler        |
-| **Session Model**     | [DOC-08](src/app/docs/[[...slug]]/page.tsx) | Session state machine & TTL decay spec             |
-| **Storage Model**     | [DOC-13](src/app/docs/[[...slug]]/page.tsx) | On-chain state minimization vs off-chain indexes   |
-| **Threat Model**      | [DOC-14](src/app/docs/[[...slug]]/page.tsx) | Security assumptions & attack mitigations          |
-| **Integration Guide** | [DOC-15](src/app/docs/[[...slug]]/page.tsx) | Soroban Rust Smart Account implementation code     |
-| **ADR Log**           | [DOC-19](src/app/docs/[[...slug]]/page.tsx) | Architectural Decision Records (ADR-001 & ADR-002) |
+| **Simple Overview**   | [DOC-00](https://stellar-aegis.vercel.app/docs/simple-guide) | Plain-language introduction and corporate analogy  |
+| **Project Context**   | [DOC-01](https://stellar-aegis.vercel.app/docs/project-context) | High-level control plane thesis and positioning    |
+| **Problem Statement** | [DOC-02](https://stellar-aegis.vercel.app/docs/problem-statement) | Operational friction analysis in Soroban dApps     |
+| **Policy Model**      | [DOC-07](https://stellar-aegis.vercel.app/docs/policy-model) | YAML policy format & deterministic compiler        |
+| **Session Model**     | [DOC-08](https://stellar-aegis.vercel.app/docs/session-model) | Session state machine & TTL decay spec             |
+| **Storage Model**     | [DOC-13](https://stellar-aegis.vercel.app/docs/storage-model) | On-chain state minimization vs off-chain indexes   |
+| **Threat Model**      | [DOC-14](https://stellar-aegis.vercel.app/docs/threat-model) | Security assumptions & attack mitigations          |
+| **Integration Guide** | [DOC-15](https://stellar-aegis.vercel.app/docs/smart-account-integration) | Soroban Rust Smart Account implementation code     |
+| **ADR Log**           | [DOC-19](https://stellar-aegis.vercel.app/docs/adr) | Architectural Decision Records (ADR-001 & ADR-002) |
 
 ---
 

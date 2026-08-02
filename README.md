@@ -3,13 +3,6 @@
   <h1>Stellar Aegis</h1>
   <p>Authorization Control Plane for Stellar Smart Accounts.</p>
 
-  <a href="https://stellar-aegis.vercel.app"><img src="https://img.shields.io/badge/demo-live-22c55e.svg" alt="Live demo"></a>
-  <img src="https://img.shields.io/badge/chain-Stellar%20Mainnet%2FTestnet-7c3aed.svg" alt="Stellar Network">
-  <img src="https://img.shields.io/badge/contracts-Soroban%20Rust-111827.svg" alt="Soroban Contracts">
-  <img src="https://img.shields.io/badge/frontend-Next.js%2015-black.svg" alt="Next.js 15">
-  <img src="https://img.shields.io/badge/auth-Passkey%20%2F%20WebAuthn-f59e0b.svg" alt="Passkey WebAuthn">
-</div>
-
 ---
 
 Stellar Aegis is an **Authorization Control Plane** engineered for Stellar Smart Accounts (Soroban Protocol 15+).
@@ -73,37 +66,30 @@ sequenceDiagram
 ## Architecture Overview
 
 ```mermaid
-flowchart TD
-  subgraph ClientLayer ["Client & Agent Layer"]
-    dApp["Frontend dApp"]
-    Agent["Autonomous AI Agent"]
-    Passkey["WebAuthn Passkey Wallet"]
-  end
+flowchart LR
+  Frontend["Next.js Web App"] --> Landing["Storytelling Landing Page"]
+  Frontend --> Docs["Bilingual Docs (/docs)"]
+  Frontend --> Console["Aegis Control Console"]
 
-  subgraph ControlPlane ["Stellar Aegis Control Plane"]
-    SDK["@stellar-aegis/sdk"]
-    SessionMgr["Session Manager"]
-    PolicyEngine["YAML Policy Compiler"]
-    CircuitBreaker["Emergency Revocation Console"]
-    EventIndexer["Soroban Telemetry Indexer"]
-  end
+  Client["dApp / AI Agent / Wallet"] --> SDK["@stellar-aegis/sdk"]
+  SDK --> SessionMgr["Session Manager"]
+  SDK --> PolicyEngine["YAML Policy Compiler"]
+  SDK --> CircuitBreaker["Emergency Revocation Console"]
 
-  subgraph OnChainLayer ["Stellar Soroban On-Chain"]
-    SmartAccount["Soroban Smart Account"]
-    CheckAuth["check_auth Host Vector"]
-    TempStorage["Soroban Temporary Storage (TTL)"]
-    Ledger["Stellar Blockchain Ledger"]
-  end
+  PolicyEngine --> WASM["WASM Binary Rule Digest"]
+  SessionMgr --> SessionGrant["Session Token"]
 
-  ClientLayer --> SDK
-  SDK --> SessionMgr
-  SDK --> PolicyEngine
-  SessionMgr --> TempStorage
-  PolicyEngine --> CheckAuth
-  CircuitBreaker --> SmartAccount
-  SmartAccount --> CheckAuth
-  CheckAuth --> Ledger
-  EventIndexer --> Ledger
+  SessionGrant --> TempStorage["Soroban Temporary Storage (TTL)"]
+  CircuitBreaker --> RevocationFlag["On-Chain Revocation Flag"]
+
+  Submitter["Relayer / User"] --> Contract["Soroban Smart Account"]
+  Contract --> CheckAuth["check_auth Host Vector"]
+  CheckAuth --> TempStorage
+  CheckAuth --> RevocationFlag
+  CheckAuth --> Ledger["Stellar Blockchain Ledger"]
+
+  EventIndexer["Soroban Event Indexer"] --> Ledger
+  EventIndexer --> Console
 ```
 
 ### Stack & Primitives
@@ -119,19 +105,23 @@ flowchart TD
 ## Core Features
 
 ### 🔑 1. Delegated Session Lifecycles
+
 - Create, rotate, inspect, and expire temporary delegated session keys.
 - Bounded scopes with explicit expiration timestamps and contract allowlists.
 - Leveraging Soroban Temporary Storage for zero-waste state auto-reclamation.
 
 ### 📜 2. Human-Readable Policy Compiler
+
 - Define velocity spend limits and time locks in clean YAML syntax.
 - Compiles policies into lightweight binary data structures evaluated deterministically inside `check_auth`.
 
 ### 🚨 3. Emergency Circuit Breaker (Revocation)
+
 - Single-click emergency revocation flags written directly to Smart Account storage.
 - Safely strip delegated capabilities from compromised AI agents without re-keying the main Passkey owner.
 
 ### 📊 4. Real-Time Observability & Explainability
+
 - Index Soroban events to track active session counts, sponsor balance, and transaction velocity.
 - Simulate transactions off-chain to provide human-readable error explanations when `check_auth` fails.
 
@@ -141,17 +131,17 @@ flowchart TD
 
 The project includes deep-dive architectural specifications built from first principles:
 
-| Specification | Document | Description |
-| --- | --- | --- |
-| **Simple Overview** | [DOC-00](src/app/docs/[[...slug]]/page.tsx) | Plain-language introduction and corporate analogy |
-| **Project Context** | [DOC-01](src/app/docs/[[...slug]]/page.tsx) | High-level control plane thesis and positioning |
-| **Problem Statement** | [DOC-02](src/app/docs/[[...slug]]/page.tsx) | Operational friction analysis in Soroban dApps |
-| **Policy Model** | [DOC-07](src/app/docs/[[...slug]]/page.tsx) | YAML policy format & deterministic compiler |
-| **Session Model** | [DOC-08](src/app/docs/[[...slug]]/page.tsx) | Session state machine & TTL decay spec |
-| **Storage Model** | [DOC-13](src/app/docs/[[...slug]]/page.tsx) | On-chain state minimization vs off-chain indexes |
-| **Threat Model** | [DOC-14](src/app/docs/[[...slug]]/page.tsx) | Security assumptions & attack mitigations |
-| **Integration Guide** | [DOC-15](src/app/docs/[[...slug]]/page.tsx) | Soroban Rust Smart Account implementation code |
-| **ADR Log** | [DOC-19](src/app/docs/[[...slug]]/page.tsx) | Architectural Decision Records (ADR-001 & ADR-002) |
+| Specification               | Document                                   | Description                                        |
+| --------------------------- | ------------------------------------------ | -------------------------------------------------- |
+| **Simple Overview**   | [DOC-00](src/app/docs/[[...slug]]/page.tsx) | Plain-language introduction and corporate analogy  |
+| **Project Context**   | [DOC-01](src/app/docs/[[...slug]]/page.tsx) | High-level control plane thesis and positioning    |
+| **Problem Statement** | [DOC-02](src/app/docs/[[...slug]]/page.tsx) | Operational friction analysis in Soroban dApps     |
+| **Policy Model**      | [DOC-07](src/app/docs/[[...slug]]/page.tsx) | YAML policy format & deterministic compiler        |
+| **Session Model**     | [DOC-08](src/app/docs/[[...slug]]/page.tsx) | Session state machine & TTL decay spec             |
+| **Storage Model**     | [DOC-13](src/app/docs/[[...slug]]/page.tsx) | On-chain state minimization vs off-chain indexes   |
+| **Threat Model**      | [DOC-14](src/app/docs/[[...slug]]/page.tsx) | Security assumptions & attack mitigations          |
+| **Integration Guide** | [DOC-15](src/app/docs/[[...slug]]/page.tsx) | Soroban Rust Smart Account implementation code     |
+| **ADR Log**           | [DOC-19](src/app/docs/[[...slug]]/page.tsx) | Architectural Decision Records (ADR-001 & ADR-002) |
 
 ---
 
@@ -179,6 +169,7 @@ npm run dev
 ```
 
 Open your browser at:
+
 ```text
 http://localhost:3000
 ```

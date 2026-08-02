@@ -4,8 +4,9 @@ import { GridRails } from '@/components/monitor/GridRails';
 import { Navbar } from '@/components/monitor/Navbar';
 import { Hero } from '@/components/monitor/Hero';
 import { Marquee } from '@/components/monitor/Marquee';
-import { Stats } from '@/components/monitor/Stats';
 import { Statement } from '@/components/monitor/Statement';
+import { Stats } from '@/components/monitor/Stats';
+import { SolutionThesis } from '@/components/monitor/SolutionThesis';
 import { Capabilities } from '@/components/monitor/Capabilities';
 import { AuthLifecycle } from '@/components/monitor/AuthLifecycle';
 import { BentoFeatures } from '@/components/monitor/BentoFeatures';
@@ -32,6 +33,7 @@ export default function HomePage() {
       <Marquee />
       <Statement />
       <Stats />
+      <SolutionThesis />
       <Capabilities />
       <AuthLifecycle />
       {/* <BentoFeatures /> */}

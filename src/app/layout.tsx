@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MONITOR — Your brand, visible everywhere AI searches",
-  description: "AI Search Visibility & Monitoring Platform. Track, analyze, and optimize your brand presence across ChatGPT, Perplexity, Claude, Gemini, and AI search engines.",
+  title: "Stellar Aegis — Authorization Control Plane for Stellar Smart Accounts",
+  description: "Aegis brings granular session policies, passkey-native authentication, and lifecycle-aware authorization to Stellar — without replacing your Smart Account.",
 };
 
 export default function RootLayout({

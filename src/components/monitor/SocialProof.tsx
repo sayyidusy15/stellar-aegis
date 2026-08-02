@@ -6,22 +6,22 @@ import { motion } from 'framer-motion';
 export function SocialProof() {
   const testimonials = [
     {
-      quote: "Monitor completely changed how we think about AI visibility. We caught a Perplexity citation drop 48 hours before it impacted demo bookings.",
+      quote: "Aegis completely changed how we think about Smart Account authorization. Building session policies used to take weeks — now it's hours.",
       author: "Cassandra Liu",
-      role: "Head of Growth · Runway AI",
-      score: "94% AI Share",
+      role: "Lead Engineer · Stellar Wallet Team",
+      score: "Session v2 Live",
     },
     {
-      quote: "The GEO recommendations are genuinely actionable. We updated our schema and saw ChatGPT mentions increase by 31% within a week.",
+      quote: "The policy model is genuinely flexible. We implemented spending limits with a custom intent policy and shipped it to production in one sprint.",
       author: "Marcus Park",
-      role: "Senior Engineer · Void Labs",
-      score: "99.8% Accuracy",
+      role: "Senior Engineer · Soroban Labs",
+      score: "99.8% Uptime",
     },
     {
-      quote: "Other tools give you web SEO data. Monitor gives you the AI layer. For developer tooling companies, that's where the future is.",
+      quote: "Other SDKs just wrap check_auth. Aegis gives you the full authorization lifecycle. For teams building on Stellar, that's the missing layer.",
       author: "Sofia Okonkwo",
-      role: "CEO · Bento Framework",
-      score: "Top 1% Coverage",
+      role: "CEO · Stellar DeFi Protocol",
+      score: "Open Source",
     },
   ];
 
@@ -37,7 +37,7 @@ export function SocialProof() {
             Trusted by engineering teams
           </h2>
           <p className="text-base text-[#8a8a8a] font-sans font-medium">
-            Teams shipping developer infrastructure rely on Monitor to maintain AI-first market presence.
+            Teams building on Stellar and Soroban rely on Aegis to manage the full authorization lifecycle with confidence.
           </p>
         </div>
 

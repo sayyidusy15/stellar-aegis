@@ -12,18 +12,18 @@ export function Footer() {
           <div className="col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-5 h-5 rounded-sm bg-white flex items-center justify-center font-mono font-bold text-[#000000] text-xs">
-                M
+                A
               </div>
               <span className="font-mono font-bold text-lg tracking-widest text-[#ffffff]">
-                MONITOR
+                STELLAR AEGIS
               </span>
             </Link>
             <p className="text-xs text-[#8a8a8a] max-w-sm leading-relaxed font-sans font-medium">
-              AI Search Visibility & Brand Citation Intelligence Platform. Track, measure, and optimize your presence across generative search engines.
+              Authorization Control Plane for Stellar Smart Accounts. Granular session policies, passkey-native auth, and lifecycle-aware authorization — without replacing your Smart Account.
             </p>
             <div className="flex items-center gap-2 text-[11px] font-mono text-[#8a8a8a]">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>All Systems Operational // Engine v1.4</span>
+              <span>All Systems Operational // Aegis v1.0</span>
             </div>
           </div>
 
@@ -93,7 +93,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a href="#about" className="hover:text-[#ffffff] transition-colors">
-                  About Monitor
+                  About Aegis
                 </a>
               </li>
               <li>
@@ -117,9 +117,9 @@ export function Footer() {
 
         {/* Bottom Bar (Legal text scaled down to 11px font.size.md) */}
         <div className="pt-8 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#8a8a8a] font-sans gap-4">
-          <p>© 2026 Monitor Technologies Inc. All rights reserved.</p>
+          <p>© 2026 Stellar Aegis. Open source project built on Stellar & Soroban.</p>
           <p className="font-mono">
-            Designed for AI Search Visibility & Brand Intelligence.
+            Built on Stellar · Powered by Soroban · Open Source.
           </p>
         </div>
       </div>

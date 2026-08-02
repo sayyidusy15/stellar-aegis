@@ -23,7 +23,7 @@ export function Integrations() {
             AI ENGINE COVERAGE
           </h3>
           <p className="text-lg font-sans font-bold text-[#ffffff]">
-            Monitoring across every major LLM search network
+            Native integration with the Stellar & Soroban ecosystem
           </p>
         </div>
 

@@ -24,18 +24,18 @@ export function CtaFinal() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-[661px] bg-[#1f1f1f] border border-[#0d0d0d] text-xs font-mono text-[#8a8a8a]">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>FREE 14-DAY TRIAL · NO CREDIT CARD NEEDED</span>
+            <span>OPEN SOURCE · MIT LICENSE · BUILT ON SOROBAN</span>
           </div>
 
           {/* Headline */}
           <h2 className="text-4xl sm:text-6xl font-bold tracking-tight text-[#ffffff] font-sans leading-[1.1]">
-            Start monitoring your<br />
-            <span className="text-[#8a8a8a]">AI search presence today.</span>
+            Start building with<br />
+            <span className="text-[#8a8a8a]">Aegis today.</span>
           </h2>
 
           {/* Subtext */}
           <p className="text-base text-[#8a8a8a] max-w-xl mx-auto leading-relaxed font-sans font-medium">
-            Join 500+ engineering teams already tracking LLM citations. Set up in under 5 minutes, no script installation required.
+            Open source and ready to integrate. Add granular session policies, passkey auth, and sponsorship to your Stellar Smart Account in minutes.
           </p>
 
           {/* CTA Buttons Row */}

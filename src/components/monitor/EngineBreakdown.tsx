@@ -65,7 +65,7 @@ export function EngineBreakdown() {
           {activeTab === 'prompt' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
               <div className="flex justify-between text-[#8a8a8a]">
-                <span>INPUT PROMPT MONITORING MATRIX</span>
+                <span>AUTHORIZATION LIFECYCLE MATRIX</span>
                 <span className="text-emerald-400">14.2M SAMPLES / DAY</span>
               </div>
               <div className="p-4 rounded-[16px] bg-[#000000] border border-[#1f1f1f] text-[#ffffff] leading-relaxed">
@@ -75,7 +75,7 @@ export function EngineBreakdown() {
                 </code>
               </div>
               <p className="text-xs text-[#8a8a8a] font-sans">
-                Monitor simulates real-world developer & buyer queries across 1,200+ industry intent categories.
+                Aegis orchestrates the full authorization lifecycle across sessions, policies, and signers — from creation to revocation.
               </p>
             </motion.div>
           )}

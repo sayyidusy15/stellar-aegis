@@ -15,10 +15,10 @@ export function BentoFeatures() {
             <span>BENTO ARCHITECTURE</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#ffffff] font-sans">
-            Complete Visibility Across LLM Networks
+            Complete Authorization Control for Stellar Developers
           </h2>
           <p className="text-base text-[#8a8a8a] font-sans font-medium">
-            Monitor monitors every prompt, citation, and recommendation across the AI ecosystem so your team never misses a shift in search share.
+            Aegis handles every layer of the authorization lifecycle — session management, policy enforcement, delegation, and revocation — so your Smart Account stays secure and flexible.
           </p>
         </div>
 

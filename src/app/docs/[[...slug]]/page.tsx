@@ -16,9 +16,9 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const resolvedParams = await params;
-  const slugArray = resolvedParams.slug || ['overview'];
+  const slugArray = resolvedParams.slug || ['simple-guide'];
   const slugKey = slugArray.join('/');
-  const doc = DOCS_DATA[slugKey];
+  const doc = DOCS_DATA[slugKey] || DOCS_DATA['simple-guide'];
 
   if (!doc) {
     return {
@@ -34,15 +34,15 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function DocPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const slugArray = resolvedParams.slug || ['overview'];
+  const slugArray = resolvedParams.slug || ['simple-guide'];
   const slugKey = slugArray.join('/');
 
   const doc = DOCS_DATA[slugKey];
 
   if (!doc) {
-    // Fallback to overview if slug is invalid or root /docs
+    // Fallback to simple-guide if slug is invalid or overview
     if (slugKey === 'overview' || !resolvedParams.slug) {
-      redirect('/docs/overview');
+      redirect('/docs/simple-guide');
     } else {
       notFound();
     }

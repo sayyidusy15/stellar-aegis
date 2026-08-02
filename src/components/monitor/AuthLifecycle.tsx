@@ -171,16 +171,16 @@ export function AuthLifecycle() {
                 >
                   {/* Active left accent bar */}
                   {isActive && (
-                    <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-indigo-500" />
+                    <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#FF4747]" />
                   )}
 
                   {/* Step number */}
-                  <span className={`text-[10px] font-mono w-5 shrink-0 ${isActive ? 'text-indigo-400' : 'text-[#8a8a8a]/50'}`}>
+                  <span className={`text-[10px] font-mono w-5 shrink-0 ${isActive ? 'text-[#FF4747]' : 'text-[#8a8a8a]/50'}`}>
                     {stage.num}
                   </span>
 
                   {/* Icon */}
-                  <span className={`transition-colors duration-200 ${isActive ? 'text-indigo-400' : 'text-[#8a8a8a]/50 group-hover:text-[#8a8a8a]'}`}>
+                  <span className={`transition-colors duration-200 ${isActive ? 'text-[#FF4747]' : 'text-[#8a8a8a]/50 group-hover:text-[#8a8a8a]'}`}>
                     {stage.icon}
                   </span>
 
@@ -211,13 +211,13 @@ export function AuthLifecycle() {
               >
                 {/* Stage Badge + Title */}
                 <div className="flex items-center gap-4">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 border border-indigo-500/40 bg-indigo-500/10 text-indigo-400 text-[10px] font-mono tracking-widest rounded-none">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 border border-[#FF4747]/40 bg-[#FF4747]/10 text-[#FF4747] text-[10px] font-mono tracking-widest rounded-none">
                     Stage {active.num}
                   </span>
                   <span className="text-xl sm:text-2xl font-semibold font-mono text-[#ffffff] tracking-tight">
                     {active.label}
                   </span>
-                  <span className="ml-auto text-indigo-400/60">
+                  <span className="ml-auto text-[#FF4747]/60">
                     {active.icon}
                   </span>
                 </div>

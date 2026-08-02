@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,14 +36,16 @@ export function Navbar() {
           {/* Left: Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
           >
-            <div className="w-5 h-5 rounded-sm bg-white flex items-center justify-center font-mono font-bold text-[#000000] text-xs select-none">
-              A
-            </div>
-            <span className="font-mono font-bold text-lg tracking-widest text-[#ffffff] select-none">
-              STELLAR AEGIS
-            </span>
+            <Image
+              src="/logo-aegis-2.png"
+              alt="Stellar Aegis"
+              width={110}
+              height={28}
+              className="object-contain select-none"
+              priority
+            />
           </Link>
 
           {/* Center: Navigation Links */}

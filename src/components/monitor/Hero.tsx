@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import { GridFrame } from './GridFrame';
 
 function GitHubIcon({ className }: { className?: string }) {
@@ -17,118 +18,58 @@ export function Hero() {
   const words = 'The Authorization Control Plane for Stellar Smart Accounts.'.split(' ');
 
   return (
-    /*
-      overflow-hidden is CRITICAL: keeps all gradient orbs strictly
-      inside the hero section boundary, no spill into sections below.
-    */
-    <section className="relative pt-20 overflow-hidden bg-[#000000] text-[#ffffff]">
+    <section className="relative pt-20 bg-[#000000] text-[#ffffff]">
+      {/* Grid frame limits the background image and content bounds inside the rails */}
+      <GridFrame borderClasses="border-b border-[#8A8A8A]/30" className="overflow-hidden">
+        
+        {/* Static Background Mesh Gradient Image for Hero (Bounded by Rails) */}
+        <div className="absolute inset-0 z-0 select-none pointer-events-none">
+          <Image
+            src="/mesh-gradient/gradient-hero.png"
+            alt="Hero Mesh Gradient"
+            fill
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover object-center"
+            priority
+          />
+        </div>
 
-      {/* ─────────────────────────────────────────────────── */}
-      {/* ANIMATED WAVE GRADIENT — CSS @keyframes            */}
-      {/* Orbs move in wide elliptical (wave-like) paths.    */}
-      {/* ─────────────────────────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Orb 1 — Indigo / Blue wave, anchored top-left */}
+        {/* Dark radial fade to blend edges and center text readability */}
         <div
-          className="absolute rounded-full bg-indigo-600/55 blur-[140px]"
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{
-            width: 560,
-            height: 320,
-            top: '0%',
-            left: '5%',
-            animation: 'waveA 14s ease-in-out infinite',
-          }}
-        />
-        {/* Orb 2 — Amber / Gold wave, top-right */}
-        <div
-          className="absolute rounded-full bg-amber-500/40 blur-[120px]"
-          style={{
-            width: 460,
-            height: 280,
-            top: '10%',
-            right: '0%',
-            animation: 'waveB 18s ease-in-out infinite',
-          }}
-        />
-        {/* Orb 3 — Violet, center */}
-        <div
-          className="absolute rounded-full bg-violet-700/45 blur-[130px]"
-          style={{
-            width: 420,
-            height: 260,
-            top: '15%',
-            left: '35%',
-            animation: 'waveC 22s ease-in-out infinite',
-          }}
-        />
-        {/* Orb 4 — Cyan accent, bottom */}
-        <div
-          className="absolute rounded-full bg-cyan-600/30 blur-[100px]"
-          style={{
-            width: 300,
-            height: 200,
-            bottom: '5%',
-            left: '20%',
-            animation: 'waveD 16s ease-in-out infinite',
+            background:
+              'radial-gradient(circle 500px at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%)',
           }}
         />
 
-        {/* Top vignette — darkens so navbar text is readable */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#000000] to-transparent" />
-        {/* Bottom vignette — fades gradient into next section */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#000000] to-transparent" />
+        {/* Blueprint grid overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none z-[2]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(138,138,138,0.045) 1px, transparent 1px),' +
+              'linear-gradient(90deg, rgba(138,138,138,0.045) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
 
-        {/* Wave keyframe definitions */}
-        <style>{`
-          @keyframes waveA {
-            0%,100% { transform: translate(0px,   0px)  scaleX(1);    }
-            30%      { transform: translate(120px, -30px) scaleX(1.1);  }
-            60%      { transform: translate(60px,   20px) scaleX(0.95); }
-          }
-          @keyframes waveB {
-            0%,100% { transform: translate(0px,   0px)  scaleX(1);    }
-            35%      { transform: translate(-100px, 25px) scaleX(1.08); }
-            70%      { transform: translate(-40px, -20px) scaleX(0.92);}
-          }
-          @keyframes waveC {
-            0%,100% { transform: translate(0px,   0px)  scaleY(1);    }
-            25%      { transform: translate(80px, -25px) scaleY(1.1);  }
-            75%      { transform: translate(-80px, 25px) scaleY(0.9);  }
-          }
-          @keyframes waveD {
-            0%,100% { transform: translate(0px,  0px)  scale(1);    }
-            50%      { transform: translate(100px,-15px) scale(1.15); }
-          }
-        `}</style>
-      </div>
-
-      {/* Blueprint grid overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none z-[1]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(138,138,138,0.045) 1px, transparent 1px),' +
-            'linear-gradient(90deg, rgba(138,138,138,0.045) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      {/* Grid frame: section bottom border */}
-      <GridFrame borderClasses="border-b border-[#8A8A8A]/30">
         <div className="relative z-10 flex flex-col items-center text-center px-8 pt-24 md:pt-32 pb-0">
 
-          {/* ── Badge ── */}
+          {/* ── Badge (Pill with #FF4747 border, no v1.0 inner release pill) ── */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-[661px] bg-[#0d0d0d]/90 backdrop-blur-sm border border-[#8A8A8A]/25 text-[11px] font-mono text-[#8a8a8a] mb-8 tracking-wider"
+            className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#0d0d0d]/85 backdrop-blur-sm border border-[#FF4747]/20 text-[11px] text-[#8a8a8a] mb-8 font-sans"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-            <span className="text-[#ffffff] font-medium tracking-normal">STELLAR AEGIS</span>
-            <span className="text-[#8A8A8A]/40">·</span>
-            <span>Authorization Control Plane for Soroban</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4747] mr-2.5 animate-pulse" />
+            <span className="font-medium tracking-wide text-white/95">
+              Authorization Control Plane for Soroban
+            </span>
           </motion.div>
+
 
           {/* ── H1 — lighter weight ── */}
           <h1 className="text-[32px] sm:text-[48px] md:text-[54px] font-semibold tracking-tight text-[#ffffff] max-w-3xl leading-[1.1] font-sans mb-5">

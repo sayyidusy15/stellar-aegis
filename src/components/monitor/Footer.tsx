@@ -2,125 +2,51 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Footer() {
   return (
-    <footer className="bg-[#000000] text-[#8a8a8a] border-t border-[#1f1f1f] pt-16 pb-12 font-sans">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
-          {/* Brand Column (2 cols) */}
-          <div className="col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-sm bg-white flex items-center justify-center font-mono font-bold text-[#000000] text-xs">
-                A
-              </div>
-              <span className="font-mono font-bold text-lg tracking-widest text-[#ffffff]">
-                STELLAR AEGIS
-              </span>
-            </Link>
-            <p className="text-xs text-[#8a8a8a] max-w-sm leading-relaxed font-sans font-medium">
-              Authorization Control Plane for Stellar Smart Accounts. Granular session policies, passkey-native auth, and lifecycle-aware authorization — without replacing your Smart Account.
-            </p>
-            <div className="flex items-center gap-2 text-[11px] font-mono text-[#8a8a8a]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>All Systems Operational // Aegis v1.0</span>
-            </div>
-          </div>
+    <footer className="bg-[#000000] text-[#8a8a8a] border-t border-[#1f1f1f] py-12 font-sans">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-8 border-b border-[#1f1f1f]">
+          {/* Left: Minimalist Logo Link */}
+          <Link href="/" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm">
+            <Image
+              src="/logo-aegis-2.png"
+              alt="Stellar Aegis Logo"
+              width={100}
+              height={26}
+              className="object-contain"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+          </Link>
 
-          {/* Product Links */}
-          <div className="space-y-3 font-sans text-xs">
-            <span className="font-bold text-[#ffffff] uppercase tracking-wider block text-[11px] mb-2 font-mono">
-              Product
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <a href="#features" className="hover:text-[#ffffff] transition-colors">
-                  Engine v1.4
-                </a>
-              </li>
-              <li>
-                <a href="#visibility" className="hover:text-[#ffffff] transition-colors">
-                  LLM Coverage
-                </a>
-              </li>
-              <li>
-                <a href="#bento" className="hover:text-[#ffffff] transition-colors">
-                  Citation Radar
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="hover:text-[#ffffff] transition-colors">
-                  Pricing Plans
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources Links */}
-          <div className="space-y-3 font-sans text-xs">
-            <span className="font-bold text-[#ffffff] uppercase tracking-wider block text-[11px] mb-2 font-mono">
-              Resources
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/docs/simple-guide" className="hover:text-[#ffffff] transition-colors">
-                  Aegis Documentation
-                </Link>
-              </li>
-              <li>
-                <a href="#features" className="hover:text-[#ffffff] transition-colors">
-                  GEO Playbook
-                </a>
-              </li>
-              <li>
-                <a href="#bento" className="hover:text-[#ffffff] transition-colors">
-                  LLM Benchmarks
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="hover:text-[#ffffff] transition-colors">
-                  API Reference
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div className="space-y-3 font-sans text-xs">
-            <span className="font-bold text-[#ffffff] uppercase tracking-wider block text-[11px] mb-2 font-mono">
-              Company
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <a href="#about" className="hover:text-[#ffffff] transition-colors">
-                  About Aegis
-                </a>
-              </li>
-              <li>
-                <a href="#careers" className="hover:text-[#ffffff] transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#privacy" className="hover:text-[#ffffff] transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#terms" className="hover:text-[#ffffff] transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-            </ul>
+          {/* Center/Right: Simple navigation links */}
+          <div className="flex flex-wrap items-center gap-6 text-xs text-[#8a8a8a]">
+            <a href="#why" className="hover:text-white transition-colors">Why</a>
+            <a href="#how-it-works" className="hover:text-white transition-colors">How it works</a>
+            <a href="#features" className="hover:text-white transition-colors">Features</a>
+            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            <Link href="/docs/simple-guide" className="hover:text-white transition-colors">Docs</Link>
           </div>
         </div>
 
-        {/* Bottom Bar (Legal text scaled down to 11px font.size.md) */}
-        <div className="pt-8 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#8a8a8a] font-sans gap-4">
-          <p>© 2026 Stellar Aegis. Open source project built on Stellar & Soroban.</p>
-          <p className="font-mono">
-            Built on Stellar · Powered by Soroban · Open Source.
-          </p>
+        {/* Bottom Bar: Copyright and Stellar branding */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-[11px] text-[#555555]">
+          <p>© 2026 Stellar Aegis. Open source project built on Stellar &amp; Soroban.</p>
+          
+          {/* Stellar Logo integrated here */}
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[10px] tracking-wider uppercase text-[#555555]/80">POWERED BY</span>
+            <Image
+              src="/images/hero-section/marquee/stellar.png"
+              alt="Stellar Logo"
+              width={70}
+              height={20}
+              className="object-contain opacity-60 hover:opacity-100 transition-opacity"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+          </div>
         </div>
       </div>
     </footer>

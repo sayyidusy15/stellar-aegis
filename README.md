@@ -1,7 +1,14 @@
 <div align="center">
-  <img src="public/logo-aegis-2.png" width="160" alt="Stellar Aegis">
+  <img src="public/logo-aegis-2.png" width="120" alt="Stellar Aegis">
   <h1>Stellar Aegis</h1>
   <p>Authorization Control Plane for Stellar Smart Accounts.</p>
+
+  <a href="https://stellar-aegis.vercel.app"><img src="https://img.shields.io/badge/demo-live-22c55e.svg" alt="Live demo"></a>
+  <img src="https://img.shields.io/badge/chain-Stellar%20Mainnet%2FTestnet-7c3aed.svg" alt="Stellar Network">
+  <img src="https://img.shields.io/badge/contracts-Soroban%20Rust-111827.svg" alt="Soroban">
+  <img src="https://img.shields.io/badge/frontend-Next.js%2015-black.svg" alt="Next.js 15">
+  <img src="https://img.shields.io/badge/wallet-Freighter%20%2F%20Passkey-f59e0b.svg" alt="Freighter & Passkey">
+</div>
 
 ---
 

@@ -108,31 +108,66 @@ export function Statement() {
             </div>
 
             {/* 3. Multi-Credential Auth Card */}
-            <div className="relative flex-1 border-b border-[#8A8A8A]/30 bg-[#080808]/40 p-8 flex flex-col justify-between">
+            <div className="relative flex-1 border-b border-[#8A8A8A]/30 bg-[#080808]/40 p-8 flex flex-col justify-center min-h-[130px]">
               <CornerSq pos="tl" />
               <CornerSq pos="tr" />
               <CornerSq pos="bl" />
               <CornerSq pos="br" />
 
-              {/* Interactive tag pills */}
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {['Passkeys', 'Ed25519', 'Secp256r1', 'Ledger'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[9px] font-mono px-2 py-0.5 border border-[#8A8A8A]/20 bg-[#0d0d0d] text-[#8a8a8a]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              {/* Animated double-row marquee of Stellar/Soroban features */}
+              <div className="relative w-full overflow-hidden py-1">
+                {/* Left fade mask */}
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
+                {/* Right fade mask */}
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
 
-              <div className="space-y-2">
-                <h3 className="text-xs font-bold tracking-wider font-mono uppercase text-[#ffffff]">
-                  Multi-Credential Auth
-                </h3>
-                <p className="text-[11px] text-[#8a8a8a] leading-relaxed">
-                  Support hardware passkeys and traditional signers under a single unified authorization architecture.
-                </p>
+                {/* Row 1: Left to Right */}
+                <div className="overflow-hidden w-full mb-3 flex">
+                  <motion.div
+                    className="flex gap-3 flex-shrink-0"
+                    animate={{ x: ['-50%', '0%'] }}
+                    transition={{ ease: 'linear', duration: 65, repeat: Infinity }}
+                    style={{ willChange: 'transform' }}
+                  >
+                    {[
+                      'Passkeys', 'Soroban SDK', 'Ed25519 Signers', 'Ledger Key', 'Protocol 20', 'Host Vector', 'Multi-Sig',
+                      'Passkeys', 'Soroban SDK', 'Ed25519 Signers', 'Ledger Key', 'Protocol 20', 'Host Vector', 'Multi-Sig',
+                      'Passkeys', 'Soroban SDK', 'Ed25519 Signers', 'Ledger Key', 'Protocol 20', 'Host Vector', 'Multi-Sig',
+                      'Passkeys', 'Soroban SDK', 'Ed25519 Signers', 'Ledger Key', 'Protocol 20', 'Host Vector', 'Multi-Sig',
+                    ].map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[11px] font-mono px-3 py-1 border border-[#8A8A8A]/20 bg-[#0d0d0d] text-[#8a8a8a] rounded-[661px] select-none whitespace-nowrap"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </motion.div>
+                </div>
+
+                {/* Row 2: Right to Left */}
+                <div className="overflow-hidden w-full flex">
+                  <motion.div
+                    className="flex gap-3 flex-shrink-0"
+                    animate={{ x: ['0%', '-50%'] }}
+                    transition={{ ease: 'linear', duration: 75, repeat: Infinity }}
+                    style={{ willChange: 'transform' }}
+                  >
+                    {[
+                      'check_auth', 'Fee-Bump Env', 'Session Keys', 'Spend Caps', 'Time-Bound', 'Intent Engine', 'Revocation',
+                      'check_auth', 'Fee-Bump Env', 'Session Keys', 'Spend Caps', 'Time-Bound', 'Intent Engine', 'Revocation',
+                      'check_auth', 'Fee-Bump Env', 'Session Keys', 'Spend Caps', 'Time-Bound', 'Intent Engine', 'Revocation',
+                      'check_auth', 'Fee-Bump Env', 'Session Keys', 'Spend Caps', 'Time-Bound', 'Intent Engine', 'Revocation',
+                    ].map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[11px] font-mono px-3 py-1 border border-[#8A8A8A]/20 bg-[#0d0d0d] text-[#8a8a8a] rounded-[661px] select-none whitespace-nowrap"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </motion.div>
+                </div>
               </div>
             </div>
 
